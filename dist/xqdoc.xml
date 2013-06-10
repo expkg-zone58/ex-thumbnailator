@@ -1,0 +1,73 @@
+<xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
+  <xqdoc:control>
+    <xqdoc:date>2013-06-10T22:32:15.559+01:00</xqdoc:date>
+    <xqdoc:version>1.1</xqdoc:version>
+  </xqdoc:control>
+  <xqdoc:module type="library">
+    <xqdoc:uri>apb.image.thumbnailator</xqdoc:uri>
+    <xqdoc:name>thumbnailator.xqm</xqdoc:name>
+    <xqdoc:comment>
+      <xqdoc:description>Generate thumbnails using http://code.google.com/p/thumbnailator/</xqdoc:description>
+      <xqdoc:author>andy bunce</xqdoc:author>
+    </xqdoc:comment>
+  </xqdoc:module>
+  <xqdoc:namespaces>
+    <xqdoc:namespace prefix="thumbnails" uri="apb.image.thumbnailator"/>
+    <xqdoc:namespace prefix="File" uri="java:java.io.File"/>
+    <xqdoc:namespace prefix="Thumbnailator" uri="java:net.coobird.thumbnailator.Thumbnailator"/>
+    <xqdoc:namespace prefix="BufferedImageBuilder" uri="net.coobird.thumbnailator.builders.BufferedImageBuilder"/>
+  </xqdoc:namespaces>
+  <xqdoc:imports/>
+  <xqdoc:variables/>
+  <xqdoc:functions>
+    <xqdoc:function arity="1">
+      <xqdoc:name>fromFilenames</xqdoc:name>
+      <xqdoc:signature>declare function fromFilenames($file as xs:string)</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>file</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+    </xqdoc:function>
+    <xqdoc:function arity="3">
+      <xqdoc:name>size</xqdoc:name>
+      <xqdoc:signature>declare function size($builder, $width as xs:int, $height as xs:int)</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>builder</xqdoc:name>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>width</xqdoc:name>
+          <xqdoc:type>xs:int</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>height</xqdoc:name>
+          <xqdoc:type>xs:int</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+    </xqdoc:function>
+    <xqdoc:function arity="4">
+      <xqdoc:name>make</xqdoc:name>
+      <xqdoc:signature>declare function make($src as xs:string, $dest as xs:string, $width as xs:integer, $height as xs:integer)</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>src</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>dest</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>width</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>height</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+    </xqdoc:function>
+  </xqdoc:functions>
+</xqdoc:xqdoc>

@@ -1,0 +1,4 @@
+<package xmlns="http://www.basex.org/modules/pkg">
+   <jar>thumbnailator-0.4.4.jar</jar>
+   <class>net.coobird.thumbnailator.Thumbnails</class>
+</package>
