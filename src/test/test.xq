@@ -1,7 +1,7 @@
 (:~
  : unit tests for thumbnail module
  :)
-import module namespace t="apb.image.thumbnails" at "../main/content/thumbnailator.xqm";
+import module namespace t="apb.image.thumbnailator" at "../main/content/thumbnailator.xqm";
 
 declare variable $pic1:=resolve-uri("simple.jpg");
  declare variable $picr:=resolve-uri("out.jpg");
@@ -34,7 +34,8 @@ declare
 declare
   %unit:test
   function local:success-function() {
-  unit:assert(t:make($pic1,$picr,60,60))
+  let $r:=t:make($pic1,$picr,60,60)
+  return unit:assert(fn:empty($r))
   
 };
   

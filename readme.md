@@ -1,5 +1,5 @@
 # apb.image.thumbnailator
-An XQuery interface to the thumbnail generator 
+An XQuery interface to the thumbnail generator library
 [thumbnailator](http://code.google.com/p/thumbnailator/)  
 
 BaseX 7.7 or greater is required.
@@ -19,3 +19,6 @@ t:make("/tmp/pic.jpg","/tmp/small.jpg",120,120)
 ````
 # Tests
 The `test.xq` script uses the BaseX [Unit module](http://docs.basex.org/wiki/Unit_Module)
+todo
+# 
+explore java binding limits and fluent interface 

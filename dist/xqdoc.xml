@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2013-06-10T22:32:15.559+01:00</xqdoc:date>
+    <xqdoc:date>2013-06-11T22:00:18.42+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -15,7 +15,8 @@
     <xqdoc:namespace prefix="thumbnails" uri="apb.image.thumbnailator"/>
     <xqdoc:namespace prefix="File" uri="java:java.io.File"/>
     <xqdoc:namespace prefix="Thumbnailator" uri="java:net.coobird.thumbnailator.Thumbnailator"/>
-    <xqdoc:namespace prefix="BufferedImageBuilder" uri="net.coobird.thumbnailator.builders.BufferedImageBuilder"/>
+    <xqdoc:namespace prefix="BufferedImageBuilder" uri="java:net.coobird.thumbnailator.builders.BufferedImageBuilder"/>
+    <xqdoc:namespace prefix="Builder" uri="java:net.coobird.thumbnailator.Thumbnails$Builder"/>
   </xqdoc:namespaces>
   <xqdoc:imports/>
   <xqdoc:variables/>
@@ -27,6 +28,28 @@
         <xqdoc:parameter>
           <xqdoc:name>file</xqdoc:name>
           <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+    </xqdoc:function>
+    <xqdoc:function arity="4">
+      <xqdoc:name>sourceRegion</xqdoc:name>
+      <xqdoc:signature>declare function sourceRegion($x as xs:integer, $y as xs:integer, $width as xs:integer, $height as xs:integer)</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>x</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>y</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>width</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>height</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
     </xqdoc:function>
