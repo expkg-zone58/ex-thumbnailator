@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2013-06-11T22:00:18.42+01:00</xqdoc:date>
+    <xqdoc:date>2013-08-04T23:22:49.533+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -30,6 +30,9 @@
           <xqdoc:type>xs:string</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="4">
       <xqdoc:name>sourceRegion</xqdoc:name>
@@ -52,6 +55,9 @@
           <xqdoc:type>xs:integer</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="3">
       <xqdoc:name>size</xqdoc:name>
@@ -69,6 +75,9 @@
           <xqdoc:type>xs:int</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
     </xqdoc:function>
     <xqdoc:function arity="4">
       <xqdoc:name>make</xqdoc:name>
@@ -91,6 +100,9 @@
           <xqdoc:type>xs:integer</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
     </xqdoc:function>
   </xqdoc:functions>
 </xqdoc:xqdoc>
