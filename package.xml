@@ -2,5 +2,5 @@
 	<file src="src/main/expath-pkg.xml" dest="expath-pkg.xml" />
 	<file src="src/main/basex.xml" dest="basex.xml" />
 	<file src="src/main/content/thumbnailator.xqm" dest="content/thumbnailator.xqm" />
-	<file src="src/main/content/thumbnailator-0.4.4.jar" dest="content/thumbnailator-0.4.4.jar" />
+	<file src="src/main/content/thumbnailator-0.4.5.jar" dest="content/thumbnailator-0.4.5.jar" />
 </zip>

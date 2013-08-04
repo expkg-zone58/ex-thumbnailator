@@ -1,13 +1,13 @@
 <package xmlns="http://expath.org/ns/pkg"
          name="apb.image.thumbnails"
          abbrev="content"
-         version="1.0.0"
+         version="1.0.1"
          spec="1.0">
 
    <title>Generate thumbnails using http://code.google.com/p/thumbnailator/</title>
    <dependency processor="basex" />
    <xquery> 
-     <namespace>apb.image.thumbnails</namespace>
+     <namespace>apb.image.thumbnailator</namespace>
      <file>thumbnailator.xqm</file>
    </xquery>
 
