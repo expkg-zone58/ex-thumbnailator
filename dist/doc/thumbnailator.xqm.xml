@@ -1,0 +1,96 @@
+<xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
+  <xqdoc:control>
+    <xqdoc:date>2016-04-16T22:19:53.356+01:00</xqdoc:date>
+    <xqdoc:version>1.1</xqdoc:version>
+  </xqdoc:control>
+  <xqdoc:module type="library">
+    <xqdoc:uri>expkg-zone58.image.thumbnailator</xqdoc:uri>
+    <xqdoc:name>thumbnailator.xqm</xqdoc:name>
+    <xqdoc:comment>
+      <xqdoc:description>Generate thumbnails using http://code.google.com/p/thumbnailator/</xqdoc:description>
+      <xqdoc:author>andy bunce</xqdoc:author>
+    </xqdoc:comment>
+  </xqdoc:module>
+  <xqdoc:namespaces>
+    <xqdoc:namespace prefix="thumbnails" uri="expkg-zone58.image.thumbnailator"/>
+    <xqdoc:namespace prefix="File" uri="java:java.io.File"/>
+    <xqdoc:namespace prefix="Thumbnailator" uri="java:net.coobird.thumbnailator.Thumbnailator"/>
+    <xqdoc:namespace prefix="BufferedImageBuilder" uri="java:net.coobird.thumbnailator.builders.BufferedImageBuilder"/>
+    <xqdoc:namespace prefix="Builder" uri="java:net.coobird.thumbnailator.Thumbnails$Builder"/>
+  </xqdoc:namespaces>
+  <xqdoc:imports/>
+  <xqdoc:variables/>
+  <xqdoc:functions>
+    <xqdoc:function arity="4">
+      <xqdoc:name>sourceRegion</xqdoc:name>
+      <xqdoc:signature>declare function sourceRegion($x as xs:integer, $y as xs:integer, $width as xs:integer, $height as xs:integer) as item()*</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>x</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>y</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>width</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>height</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="3">
+      <xqdoc:name>size</xqdoc:name>
+      <xqdoc:signature>declare function size($builder as item()*, $width as xs:int, $height as xs:int) as item()*</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>builder</xqdoc:name>
+          <xqdoc:type occurrence="*">item()</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>width</xqdoc:name>
+          <xqdoc:type>xs:int</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>height</xqdoc:name>
+          <xqdoc:type>xs:int</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="4">
+      <xqdoc:name>create-thumbnail</xqdoc:name>
+      <xqdoc:signature>declare function create-thumbnail($src as xs:string, $dest as xs:string, $width as xs:integer, $height as xs:integer) as item()*</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>src</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>dest</xqdoc:name>
+          <xqdoc:type>xs:string</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>width</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>height</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type occurrence="*">item()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+  </xqdoc:functions>
+</xqdoc:xqdoc>

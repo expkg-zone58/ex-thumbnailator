@@ -2,8 +2,8 @@ xquery version "3.0" encoding "UTF-8";
 (:~ Generate thumbnails using http://code.google.com/p/thumbnailator/
  : @author andy bunce
  :)
-module namespace thumbnails = 'apb.image.thumbnailator';
-declare default function namespace 'apb.image.thumbnailator'; 
+module namespace thumbnails = 'expkg-zone58.image.thumbnailator';
+declare default function namespace 'expkg-zone58.image.thumbnailator'; 
 
 declare namespace File="java:java.io.File";
 declare namespace Thumbnailator="java:net.coobird.thumbnailator.Thumbnailator";
@@ -15,10 +15,10 @@ Thumbnails.of(new File("path/to/directory").listFiles())
         .outputFormat("jpg")
         .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
 :)
-declare function fromFilenames($file as xs:string){
+(: declare function fromFilenames($file as xs:string){
   let $a:=File:new(file:path-to-native($file))
   return Builder:of(($a,$a))
-}; 
+}; :) 
 
 declare function sourceRegion($x as xs:integer,$y as xs:integer,
 $width as xs:integer,$height as xs:integer){
@@ -29,11 +29,12 @@ declare function size($builder,$width as xs:int,$height as xs:int){
   BufferedImageBuilder:size($builder,$width,$height)
 };  
 
-declare function make($src as xs:string,
+declare function create-thumbnail($src as xs:string,
              $dest as xs:string,
              $width as xs:integer,
              $height as xs:integer){
-    let $src:=File:new(file:path-to-native($src))
-    let $dest:=File:new(file:path-to-native($dest)) 
+    let $src:=File:new(file:resolve-path($src))
+    let $dest:=File:new(file:resolve-path($dest)) 
     return Thumbnailator:createThumbnail($src,$dest,xs:int($width),xs:int($height))              
-};         
+};
+   

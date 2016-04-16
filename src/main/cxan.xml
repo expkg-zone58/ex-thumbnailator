@@ -1,0 +1,10 @@
+<package xmlns="http://cxan.org/ns/package" id="thumbnailator">
+    <abstract>Create a thumbnail from a file path. </abstract>
+    <author id="coobird">coobird</author>
+    <maintainer id="abunce">Andy Bunce</maintainer>
+    <home>https://github.com/coobird/thumbnailator</home>
+    <category id="libs">Library</category>
+    <tag>image</tag>
+    <tag>resize</tag>
+    <tag>graphic</tag>
+</package>
