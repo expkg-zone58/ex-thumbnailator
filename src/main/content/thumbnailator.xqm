@@ -1,40 +1,52 @@
-xquery version "3.0" encoding "UTF-8";
-(:~ Generate thumbnails using http://code.google.com/p/thumbnailator/
+xquery version "3.1" encoding "UTF-8";
+(:~ Generate image thumbnails using the thumbnailator library. 
+ : @see https://github.com/coobird/thumbnailator
  : @author andy bunce
+ : @version 4.4.1
  :)
-module namespace thumbnails = 'expkg-zone58.image.thumbnailator';
-declare default function namespace 'expkg-zone58.image.thumbnailator'; 
+module namespace thumbnails = 'expkg-zone58:image.thumbnailator';
 
-declare namespace File="java:java.io.File";
-declare namespace Thumbnailator="java:net.coobird.thumbnailator.Thumbnailator";
-declare namespace BufferedImageBuilder="java:net.coobird.thumbnailator.builders.BufferedImageBuilder";
-declare namespace Builder="java:net.coobird.thumbnailator.Thumbnails$Builder";
-(:
-Thumbnails.of(new File("path/to/directory").listFiles())
-        .size(640, 480)
-        .outputFormat("jpg")
-        .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
-:)
-(: declare function fromFilenames($file as xs:string){
-  let $a:=File:new(file:path-to-native($file))
-  return Builder:of(($a,$a))
-}; :) 
-
-declare function sourceRegion($x as xs:integer,$y as xs:integer,
-$width as xs:integer,$height as xs:integer){
-  Builder:sourceRegion(xs:int($x),xs:int($y),xs:int($width),xs:int($height))
-}; 
-
-declare function size($builder,$width as xs:int,$height as xs:int){
-  BufferedImageBuilder:size($builder,$width,$height)
-};  
-
-declare function create-thumbnail($src as xs:string,
-             $dest as xs:string,
-             $width as xs:integer,
-             $height as xs:integer){
-    let $src:=File:new(file:resolve-path($src))
-    let $dest:=File:new(file:resolve-path($dest)) 
-    return Thumbnailator:createThumbnail($src,$dest,xs:int($width),xs:int($height))              
+(:~
+ : generate scaled version of source image with maximum dimension of size
+ : @param $source base64Binary (streamed?) e.g from `fetch:binary`
+ : @result base64Binary for thumbnail
+ :)
+declare function thumbnails:size($source  as xs:base64Binary,$width as xs:integer,$height as xs:integer)
+as  xs:base64Binary
+{
+  Q{java:org.expkgzone58.image.Thumbs}size($source,xs:int($width),xs:int($height))
 };
-   
+(:~
+ : generate scaled version of source image at given factors 0-1
+ : @param $source base64Binary (streamed?) e.g from `fetch:binary`
+ : @result base64Binary for thumbnail
+ :)
+declare function thumbnails:scale($source  as xs:base64Binary,$xscale as xs:float,$yscale as xs:float)
+as  xs:base64Binary
+{
+  Q{java:org.expkgzone58.image.Thumbs}scale($source,$xscale,$yscale)
+};
+
+(:~
+ : generate thumbnail using parameters specified via XML
+ : @param $source base64Binary (streamed?) e.g from `fetch:binary`
+ : @param $task XML parameters <task><size width="100" ..
+ : @result base64Binary for thumbnail
+ :)
+declare function thumbnails:task($source  as xs:base64Binary,
+                                 $task as element(task))
+as  xs:base64Binary
+{
+  Q{java:org.expkgzone58.image.Thumbs}task($source,$task)
+};
+
+(:~
+ : validate task XML against schema
+ : @param $src XML parameters <task><size width="100" ..
+ : @result validation report
+ :)
+declare function thumbnails:validation-report($src)
+as element(report)
+{
+  validate:xsd-report($src,"task.xsd")
+};

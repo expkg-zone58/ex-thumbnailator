@@ -16,7 +16,7 @@ declare namespace pkg="http://expath.org/ns/pkg";
  declare function files($src as xs:string) as xs:string*
  {
    fn:filter(file:list($src,fn:true()),
-          function ($f){file:is-file($src || $f)}
+          function ($f){($src || $f)=>fn:translate("\","/")=>file:is-file()}
         )
           !fn:translate(.,"\","/") 
  };
@@ -25,7 +25,7 @@ declare namespace pkg="http://expath.org/ns/pkg";
  : write xqdoc for $src/$path to $dest
  :)
 declare %updating  function write-xqdoc($path,$src,$dest){
-  let $url:=fn:resolve-uri( $path,$src)
+  let $url:=fn:resolve-uri( $path,$src)=>fn:trace()
   let $type:=fetch:content-type($url)
  
   return  switch($type)

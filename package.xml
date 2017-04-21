@@ -1,7 +1,7 @@
 <!--  @see http://cxan.org/faq#add-pkg  -->
 <repo abbrev="ex-thumbnailator">
-  <pkg abbrev="ex-thumbnailator" id="expkg-zone58.image.thumbnailator">
-    <name>expkg-zone58.image.thumbnailator</name>
+  <pkg abbrev="ex-thumbnailator" id="https://github.com/expkg-zone58/ex-thumbnailator">
+    <name>https://github.com/expkg-zone58/ex-thumbnailator</name>
     <abstract>Create a thumbnail from a file path.</abstract>
     <author id="coobird">coobird</author>
     <maintainer id="abunce">Andy Bunce</maintainer>
@@ -10,11 +10,7 @@
     <tag>image</tag>
     <tag>resize</tag>
     <tag>graphic</tag>
-    <version num="2.0.0">
-      <dependency processor="basex"/>
-      <file name="ex-dotml-0.0.5.xar" role="pkg"/>
-    </version>
-    <version num="2.0.1">
+    <version num="4.1.4">
       <!-- generated: {fn:current-dateTime()} -->
     </version>
   </pkg>

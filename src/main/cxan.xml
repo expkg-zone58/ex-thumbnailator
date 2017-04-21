@@ -1,5 +1,5 @@
 <package xmlns="http://cxan.org/ns/package" id="thumbnailator">
-    <abstract>Create a thumbnail from a file path. </abstract>
+    <abstract>XQuery interface to the thumbnail generator library: thumbnailator</abstract>
     <author id="coobird">coobird</author>
     <maintainer id="abunce">Andy Bunce</maintainer>
     <home>https://github.com/coobird/thumbnailator</home>

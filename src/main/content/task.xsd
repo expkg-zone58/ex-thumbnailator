@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- thumbnail schema apb apr 2017 -->
+	<xs:element name="thumbnail">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:element ref="size" />
+					<xs:element ref="scale" />
+				</xs:choice>
+				<xs:element ref="region" minOccurs="0" />
+				<xs:element ref="exif-orientation" minOccurs="0" />
+				<xs:element ref="filters" minOccurs="0" />
+			</xs:sequence>
+
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="size">
+		<xs:complexType>
+			<xs:attribute name="width" type="xs:int" />
+			<xs:attribute name="height" type="xs:int" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="scale">
+		<xs:complexType>
+			<xs:attribute name="x" type="xs:double" />
+			<xs:attribute name="y" type="xs:double" />
+		</xs:complexType>
+	</xs:element>
+
+<xs:element name="region">
+    <xs:complexType>
+      <xs:attribute name="height" type="xs:int" />
+      <xs:attribute name="width" type="xs:int" />
+      <xs:attribute name="position" type="PositionType" />
+    </xs:complexType>
+  </xs:element>
+  
+	<xs:element name="exif-orientation">
+		<xs:complexType>
+			<xs:attribute name="use" type="xs:boolean" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="filters">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="canvas" minOccurs="0" />
+				<xs:element ref="caption" minOccurs="0" />
+				<xs:element ref="colorize" minOccurs="0" />
+				<xs:element ref="flip" minOccurs="0" />
+				<xs:element ref="rotate" minOccurs="0" />
+				<xs:element ref="watermark" minOccurs="0" />
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="canvas">
+		<xs:complexType>
+			<xs:attribute name="height" type="xs:int" />
+			<xs:attribute name="width" type="xs:int" />
+			<xs:attribute name="color" type="xs:string" />
+			<xs:attribute name="position" type="PositionType" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="colorize">
+		<xs:complexType>
+			<xs:attribute name="color" type="xs:string" />
+			<xs:attribute name="alpha" type="xs:float" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="caption">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="size" type="xs:int" />
+					<xs:attribute name="font" type="xs:string" />
+					<xs:attribute name="color" type="xs:string" />
+					<xs:attribute name="position" type="PositionType" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="flip">
+		<xs:complexType>
+			<xs:attribute name="axis" type="AxisType" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="rotate">
+		<xs:complexType>
+			<xs:attribute name="angle" type="xs:float" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="watermark">
+		<xs:complexType>
+			<xs:attribute name="src" type="xs:string" />
+			<xs:attribute name="position" type="PositionType" />
+			<xs:attribute name="alpha" type="xs:float" />
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:simpleType name="AxisType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="horizontal" />
+			<xs:enumeration value="vertical" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="PositionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="TOP_LEFT" />
+			<xs:enumeration value="TOP_CENTER" />
+			<xs:enumeration value="TOP_RIGHT" />
+
+			<xs:enumeration value="MIDDLE_LEFT" />
+			<xs:enumeration value="CENTER" />
+			<xs:enumeration value="MIDDLE_RIGHT" />
+
+			<xs:enumeration value="BOTTOM_LEFT" />
+			<xs:enumeration value="BOTTOM_CENTER" />
+			<xs:enumeration value="BOTTOM_RIGHT" />
+		</xs:restriction>
+	</xs:simpleType>
+
+</xs:schema>

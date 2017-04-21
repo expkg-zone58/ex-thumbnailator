@@ -1,25 +1,51 @@
 # expkg-zone58.image.thumbnailator
 An XQuery interface to the thumbnail generator library
-[thumbnailator](https://github.com/coobird/thumbnailator)  
+[thumbnailator](https://github.com/coobird/thumbnailator). 
 
-Tested against BaseX 8.4.3.
+Tested against BaseX 8.6.2
 
 
-# Installation
+## Usage
+
+### Simple
+
+```xquery
+import module namespace t="expkg-zone58:image.thumbnailator";
+
+fetch:binary("http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg")
+=>t:scale(80,60)
+
+```
+
+### Tasks
+This function takes an XML description of the operations to apply to generate the thumbnail.
+
+```xml
+<thumbnail>
+    <size width="500" height="500"/>
+    <filters>             
+        <colorize color="green" alpha=".5"/>      
+        <caption position="CENTER">Some Text here</caption>
+        <rotate angle="15"/>
+        <canvas height="500" width="500" position="TOP_LEFT" color="black"/> 
+        <watermark src="{$watermark}" alpha=".5"  position="TOP_LEFT"/>  
+    </filters>         
+</thumbnail>
+```
+A schema is provided.
+
+## Installation
 The library is packaged in the [EXpath](http://expath.org/spec/pkg) xar format with 
-the thumbnailator jar included. It can be installed into the BaseX repository by 
-executing the command:
-````
-repo:install('https://github.com/expkg-zone58/ex-thumbnailator/dist/thumbnailator.zar')
-````
-# Usage
-````
-import module namespace t="expkg-zone58.image.thumbnailator";
-t:create-thumbnail("/tmp/pic.jpg","/tmp/small.jpg",120,120)
-````
+the thumbnailator jar included. See releases for installation instructions.
+
 # Tests
 `test.xqm` script uses the BaseX [Unit module](http://docs.basex.org/wiki/Unit_Module)
 
+## License
+
+* ex-thumbnailator Copyright (c) 2017, Andy Bunce. (Apache 2 License). 
+* thumbnailator Copyright (c) Chris Kroells (MIT License).
+
 # todo
 
-explore java binding limits and fluent interface 
+scale sourceregion 

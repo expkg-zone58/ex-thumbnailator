@@ -1,14 +1,14 @@
-<package xmlns="http://expath.org/ns/pkg"
-         name="expkg-zone58.image.thumbnailator"
-         abbrev="thumbnailator"
-         version="2.0.1"
-         spec="1.0">
+<package xmlns="http://expath.org/ns/pkg" name="https://github.com/expkg-zone58/ex-thumbnailator"
+	abbrev="thumbnailator" version="4.1.4" spec="1.0">
 
-   <title>Generate thumbnails using http://code.google.com/p/thumbnailator/</title>
-   <dependency processor="basex" />
-   <xquery> 
-     <namespace>expkg-zone58.image.thumbnailator</namespace>
-     <file>thumbnailator.xqm</file>
-   </xquery>
-
+	<title>An XQuery interface to thumbnailator the thumbnail generator library.</title>
+	<dependency processor="basex" />
+	<xquery>
+		<namespace>expkg-zone58:image.thumbnailator</namespace>
+		<file>thumbnailator.xqm</file>
+	</xquery>
+	<xsd>
+		<import-uri>expkg-zone58:image.thumbnailator/schema/task.xsd</import-uri>
+		<file>task.xsd</file>
+	</xsd>
 </package>

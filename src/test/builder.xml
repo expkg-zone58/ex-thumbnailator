@@ -1,0 +1,18 @@
+<thumbnail>
+	<!-- http://programtalk.com/java-api-usage-examples/net.coobird.thumbnailator.tasks.io.InputStreamImageSource/ 
+		ThumbnailParameterBuilder p=new ThumbnailParameterBuilder(); switch (element) 
+		{ case "size": p.size(); break; .... ThumbnailParameter tp=p.build() } -->
+	<size x="200" y="89" />
+	<scale x="1" y="1" />
+	<sourceRegion x="0" y="0" width="100" height="100" />
+	<filters>
+		
+		<canvas width="300" height="400" position=">?" crop="true"
+			fillColor="red" />
+		<caption >some text</caption>
+		<flip axis="vertical"/>
+		<colorize/>
+		<rotate angle="45" />
+		<watermark src="aa"/>
+	</filters>
+</thumbnail>

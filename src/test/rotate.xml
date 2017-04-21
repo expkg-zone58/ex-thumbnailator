@@ -1,0 +1,8 @@
+<thumbnail xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="expkg-zone58:image.thumbnailator/schema/task.xsd">
+	<size width="200" height="200" />
+	<filters>
+		<rotate angle="251" />
+    	<rotate angle="1" />
+	</filters>
+</thumbnail> 
