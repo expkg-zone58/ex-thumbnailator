@@ -17,6 +17,6 @@ let $task:=<thumbnail>
             </thumbnail>
 (: let $task:=doc("rotate.xml")/task :)
 let $x:=fetch:binary($remote)
- (: let $r:=Q{java:org.expkgzone58.image.Thumbs}size($x,xs:int(40),xs:int(40)) :)
-let $r:=Q{java:org.expkgzone58.image.Thumbs}task($x,$task) 
+ let $r:=Q{java:org.expkgzone58.image.Thumbs}size($x,xs:int(40),xs:int(40))
+(: let $r:=Q{java:org.expkgzone58.image.Thumbs}task($x,$task) :) 
 return file:write-binary($picr,$r)

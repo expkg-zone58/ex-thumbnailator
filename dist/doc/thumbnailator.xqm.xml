@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2017-04-21T14:41:43.648+01:00</xqdoc:date>
+    <xqdoc:date>2017-04-21T15:03:58.643+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -79,7 +79,7 @@
         <xqdoc:custom tag="result">base64Binary for thumbnail</xqdoc:custom>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:task</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:task($source as xs:base64Binary, $task as element(task)) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:task($source as xs:base64Binary, $task as element(thumbnail)) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>
@@ -87,7 +87,7 @@
         </xqdoc:parameter>
         <xqdoc:parameter>
           <xqdoc:name>task</xqdoc:name>
-          <xqdoc:type>element(task)</xqdoc:type>
+          <xqdoc:type>element(thumbnail)</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
       <xqdoc:return>
