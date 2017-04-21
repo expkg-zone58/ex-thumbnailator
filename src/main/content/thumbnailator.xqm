@@ -34,7 +34,7 @@ as  xs:base64Binary
  : @result base64Binary for thumbnail
  :)
 declare function thumbnails:task($source  as xs:base64Binary,
-                                 $task as element(task))
+                                 $task as element(thumbnail))
 as  xs:base64Binary
 {
   Q{java:org.expkgzone58.image.Thumbs}task($source,$task)
