@@ -39,7 +39,7 @@ let $task:=
 return fetch:binary("http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg")
 =>t:task($task)
 ```
-A schema for this is [provided](./master/src/main/content/task.xsd)
+A schema for this is [provided](./src/main/content/task.xsd)
 
 ## Installation
 The library is packaged in the [EXpath](http://expath.org/spec/pkg) xar format with 
