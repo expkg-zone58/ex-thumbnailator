@@ -54,7 +54,7 @@ The schema for this XML is available at [task.xsd](./src/main/content/task.xsd)
 
 ## Installation
 The library is packaged in the [EXpath](http://expath.org/spec/pkg) xar format with 
-the thumbnailator jar included. See [releases](../releases) for installation instructions.
+the thumbnailator jar included. See [releases](../../releases) for installation instructions.
 
 # Tests
 `test.xqm` script uses the BaseX [Unit module](http://docs.basex.org/wiki/Unit_Module)
