@@ -1,5 +1,5 @@
 <package xmlns="http://expath.org/ns/pkg" name="https://github.com/expkg-zone58/ex-thumbnailator"
-	abbrev="thumbnailator" version="4.1.5" spec="1.0">
+	abbrev="thumbnailator" version="5.0.11" spec="1.0">
 
 	<title>An XQuery interface to thumbnailator the thumbnail generator library.</title>
 	<dependency processor="basex" />

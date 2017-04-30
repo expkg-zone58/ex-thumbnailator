@@ -1,20 +1,31 @@
-# expkg-zone58.image.thumbnailator
-An XQuery interface to the thumbnail generator library
-[thumbnailator](https://github.com/coobird/thumbnailator). 
+# expkg-zone58:image.thumbnailator
+An XQuery interface to the image thumbnail generator library
+[thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 8.6.2+.
 
-Tested against BaseX 8.6.2
+Features size, scale, caption, rotate, flip, colorize, watermark. More details at [doc](doc/readme.md)
 
 
 ## Usage
 
+Images are input and output as `xs:base64Binary` items. Inputs typically come from `fetch:binary`
+which allows for file and http sources. Outputs may be saved with `file:write-binary` or `db:store`
+
 ### Simple
 
+Create a thumbnail of given size
 ```xquery
 import module namespace t="expkg-zone58:image.thumbnailator";
 
 fetch:binary("http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg")
-=>t:size(80,60)
+=>t:size(80)
+```
+or scale to a fraction of the original
 
+```xquery
+import module namespace t="expkg-zone58:image.thumbnailator";
+
+fetch:binary("file:///Z:/recordings/radio/Book%20of%20the%20Week/image.png")
+=>t:scale(0.25)
 ```
 
 ### Tasks
@@ -39,20 +50,19 @@ let $task:=
 return fetch:binary("http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg")
 =>t:task($task)
 ```
-A schema for this is [provided](./src/main/content/task.xsd)
+The schema for this XML is available at [task.xsd](./src/main/content/task.xsd)
 
 ## Installation
 The library is packaged in the [EXpath](http://expath.org/spec/pkg) xar format with 
-the thumbnailator jar included. See releases for installation instructions.
+the thumbnailator jar included. See [releases](../releases) for installation instructions.
 
 # Tests
 `test.xqm` script uses the BaseX [Unit module](http://docs.basex.org/wiki/Unit_Module)
 
 ## License
 
-* ex-thumbnailator Copyright (c) 2017, Andy Bunce. (Apache 2 License). 
+* ex-thumbnailator Copyright (c) 2016-2017, Andy Bunce. (Apache 2 License). 
 * thumbnailator Copyright (c) Chris Kroells (MIT License).
 
-# todo
 
-scale sourceregion 
+

@@ -2,6 +2,9 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<!-- thumbnail schema apb apr 2017 -->
 	<xs:element name="thumbnail">
+		<xs:annotation>
+			<xs:documentation>Root container</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
 				<xs:choice>
@@ -9,42 +12,54 @@
 					<xs:element ref="scale" />
 				</xs:choice>
 				<xs:element ref="region" minOccurs="0" />
-				<xs:element ref="exif-orientation" minOccurs="0" />
+				<xs:element ref="constrain" minOccurs="0" />
 				<xs:element ref="filters" minOccurs="0" />
+				<xs:element ref="output" minOccurs="0" />
 			</xs:sequence>
 
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="size">
+		<xs:annotation>
+			<xs:documentation>size of thumbnail to create</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="width" type="xs:int" />
-			<xs:attribute name="height" type="xs:int" />
+			<xs:attribute name="width" type="PxType" />
+			<xs:attribute name="height" type="PxType" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="scale">
+		<xs:annotation>
+			<xs:documentation>scale thumbnail from source size</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="x" type="xs:double" />
-			<xs:attribute name="y" type="xs:double" />
+			<xs:attribute name="x" type="ScaleType" />
+			<xs:attribute name="y" type="ScaleType" />
 		</xs:complexType>
 	</xs:element>
 
-<xs:element name="region">
-    <xs:complexType>
-      <xs:attribute name="height" type="xs:int" />
-      <xs:attribute name="width" type="xs:int" />
-      <xs:attribute name="position" type="PositionType" />
-    </xs:complexType>
-  </xs:element>
-  
-	<xs:element name="exif-orientation">
+	<xs:element name="region">
+		<xs:annotation>
+			<xs:documentation>region of source image to use for thumbnail.
+				default all
+			</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="use" type="xs:boolean" />
+			<xs:attribute name="height" type="PxType" />
+			<xs:attribute name="width" type="PxType" />
+			<xs:attribute name="position" type="PositionType" />
 		</xs:complexType>
 	</xs:element>
+
+
 
 	<xs:element name="filters">
+		<xs:annotation>
+			<xs:documentation>contain for filters to be applied to thumbnail
+			</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:choice maxOccurs="unbounded">
 				<xs:element ref="canvas" minOccurs="0" />
@@ -58,56 +73,84 @@
 	</xs:element>
 
 	<xs:element name="canvas">
+		<xs:annotation>
+			<xs:documentation>create a filled enclosing background for thumbnail
+			</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="height" type="xs:int" />
-			<xs:attribute name="width" type="xs:int" />
-			<xs:attribute name="color" type="xs:string" />
+			<xs:attribute name="height" type="PxType" />
+			<xs:attribute name="width" type="PxType" />
+			<xs:attribute name="color" type="ColorType" />
 			<xs:attribute name="position" type="PositionType" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="colorize">
+		<xs:annotation>
+			<xs:documentation>tint thumbnail</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="color" type="xs:string" />
-			<xs:attribute name="alpha" type="xs:float" />
+			<xs:attribute name="color" type="ColorType" />
+			<xs:attribute name="alpha" type="AlphaType" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="caption">
+		<xs:annotation>
+			<xs:documentation>add text to thumbnail</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
 					<xs:attribute name="size" type="xs:int" />
 					<xs:attribute name="font" type="xs:string" />
-					<xs:attribute name="color" type="xs:string" />
+					<xs:attribute name="color" type="ColorType" />
 					<xs:attribute name="position" type="PositionType" />
+					<xs:attribute name="insets"
+						type="xs:int">
+					</xs:attribute>
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="flip">
+		<xs:annotation>
+			<xs:documentation>flip thumbnail horizontally or vertically.
+				**Ignored if exif-orientation is true **
+			</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="axis" type="AxisType" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="rotate">
+		<xs:annotation>
+			<xs:documentation>rotate the thumbnail</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
-			<xs:attribute name="angle" type="xs:float" />
+			<xs:attribute name="angle" type="xs:float" use="required" />
 		</xs:complexType>
 	</xs:element>
 
 	<xs:element name="watermark">
+		<xs:annotation>
+			<xs:documentation>Add image to thumbnail as a watermark
+			</xs:documentation>
+		</xs:annotation>
 		<xs:complexType>
 			<xs:attribute name="src" type="xs:string" />
 			<xs:attribute name="position" type="PositionType" />
-			<xs:attribute name="alpha" type="xs:float" />
+			<xs:attribute name="alpha" type="AlphaType" />
 		</xs:complexType>
 	</xs:element>
 
 
 	<xs:simpleType name="AxisType">
+		<xs:annotation>
+			<xs:documentation>Axis of flip</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="horizontal" />
 			<xs:enumeration value="vertical" />
@@ -115,6 +158,9 @@
 	</xs:simpleType>
 
 	<xs:simpleType name="PositionType">
+		<xs:annotation>
+			<xs:documentation>Region of image to use</xs:documentation>
+		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="TOP_LEFT" />
 			<xs:enumeration value="TOP_CENTER" />
@@ -130,4 +176,87 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+	<xs:simpleType name="PxType">
+        <xs:annotation>
+        	<xs:documentation>A size in pixels</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:int">
+			<xs:minInclusive value="0"></xs:minInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="ScaleType">
+		<xs:restriction base="xs:double">
+			<xs:minExclusive value="0"></xs:minExclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="AlphaType">
+		<xs:annotation>
+			<xs:documentation>Transparency alpha value</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double">
+			<xs:minInclusive value="0"></xs:minInclusive>
+			<xs:maxInclusive value="1"></xs:maxInclusive>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="constrain">
+		<xs:annotation>
+			<xs:documentation>constraints on thumbnail</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="exif" type="xs:boolean" default="true">
+				<xs:annotation>
+					<xs:documentation> true if the Exif metadata should be used to
+						determine the orientation of the thumbnail,
+						false otherwise.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+
+			<xs:attribute name="fit" type="xs:boolean" use="optional"
+				default="true">
+				<xs:annotation>
+					<xs:documentation>fit - true if the thumbnail should be sized to
+						fit within the specified dimensions,
+						if the thumbnail is going to
+						exceed those dimensions.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+
+			<xs:attribute name="aspect" type="xs:boolean" use="optional"
+				default="true">
+				<xs:annotation>
+					<xs:documentation>keep aspect ratio</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="ColorType">
+		<xs:annotation>
+			<xs:documentation>Java colour name e.g. "red"
+				or Color.decode(value)
+				decimal, octal, or hexidecimal integer e.g
+				"#FF0096"
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"></xs:restriction>
+	</xs:simpleType>
+
+    <xs:element name="output" >
+      <xs:annotation>
+      <xs:documentation>Serialization details for output</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+        <xs:attribute name="format" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation>Output image format (JPEG, PNG, GIF, BMP and
+            WBMP). defaults to source format</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+    </xs:element>
 </xs:schema>

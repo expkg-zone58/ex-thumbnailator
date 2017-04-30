@@ -31,10 +31,10 @@ import net.coobird.thumbnailator.builders.ThumbnailParameterBuilder;
 import net.coobird.thumbnailator.filters.Pipeline;
 import net.coobird.thumbnailator.filters.Rotation;
 import net.coobird.thumbnailator.filters.Watermark;
+import net.coobird.thumbnailator.geometry.AbsoluteSize;
 import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.geometry.Region;
-import net.coobird.thumbnailator.geometry.Size;
 import net.coobird.thumbnailator.tasks.StreamThumbnailTask;
 import net.coobird.thumbnailator.filters.Canvas;
 import net.coobird.thumbnailator.filters.Caption;
@@ -51,18 +51,18 @@ import net.coobird.thumbnailator.filters.ImageFilter;
  */
 public class Thumbs extends QueryModule{
 
-    public static B64Stream size(final B64Stream inputStream, final int width, final int height)
+    public B64Stream size(final B64Stream inputStream, final int width, final int height)
             throws IOException, QueryException {
         ByteArrayInputStream is = new ByteArrayInputStream(inputStream.binary(null));
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ThumbnailParameterBuilder builder = new ThumbnailParameterBuilder();
-        builder.size(new Dimension(width, height));
+        builder.size(width, height);
         StreamThumbnailTask task = new StreamThumbnailTask(builder.build(), is, os);
         Thumbnailator.createThumbnail(task);
         return new B64Stream(new IOContent(os.toByteArray()), IOERR_X);
     }
 
-    public static B64Stream scale(final B64Stream inputStream,
+    public B64Stream scale(final B64Stream inputStream,
             final double xscale, final double yscale)
             throws IOException, QueryException {
         ByteArrayInputStream is = new ByteArrayInputStream(inputStream.binary(null));
@@ -74,7 +74,7 @@ public class Thumbs extends QueryModule{
         return new B64Stream(new IOContent(os.toByteArray()), IOERR_X);
     }
 
-    public static B64Stream task(final B64Stream inputStream, final ANode thumbnail)
+    public B64Stream task(final B64Stream inputStream, final ANode thumbnail)
             throws IOException, QueryException {
         ByteArrayInputStream is = new ByteArrayInputStream(inputStream.binary(null));
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -85,13 +85,15 @@ public class Thumbs extends QueryModule{
     }
 
     // build parameters from XML
-    static ThumbnailParameter fromNode(final ANode node) throws QueryException, IOException {
+    ThumbnailParameter fromNode(final ANode node) throws QueryException, IOException {
         ThumbnailParameterBuilder builder = new ThumbnailParameterBuilder();
+
         Iterator<ANode> itr = node.children().iterator();
         while (itr.hasNext()) {
             ANode element = itr.next();
             if (element.kind() == Data.ELEM) {
                 String name = Token.string(element.name());
+               // FnTrace.trace(name.getBytes(), "element: ".getBytes(), queryContext);
                 switch (name) {
 
                 case "size":
@@ -106,8 +108,8 @@ public class Thumbs extends QueryModule{
                     region(builder, element);
                     break;
 
-                case "exif-orientation":
-                    exif(builder, element);
+                case "constrain":
+                    constrain(builder, element);
                     break;
 
                 case "filters":
@@ -115,6 +117,12 @@ public class Thumbs extends QueryModule{
                     builder.filters(filters);
                     break;
 
+                case "output":
+                    String format = Utils.attrib(element, "format",
+                            ThumbnailParameter.ORIGINAL_FORMAT);
+                    builder.format(format);
+
+                    break;
                 default:
                     break;
                 }
@@ -123,37 +131,45 @@ public class Thumbs extends QueryModule{
         return builder.build();
     }
 
-    static void region(final ThumbnailParameterBuilder builder, final ANode node)
+    void region(final ThumbnailParameterBuilder builder, final ANode node)
             throws QueryException {
 
         int width = (int) Int.parse(node.attribute("width"), null);
         int height = (int) Int.parse(node.attribute("height"), null);
         Dimension d = new Dimension(width, height);
         Position pos = Utils.position(node, "position", Positions.CENTER);
-        Region r = new Region(pos, (Size) d);
+        Region r = new Region(pos, new AbsoluteSize(d));
         builder.region(r);
     }
-    static void exif(final ThumbnailParameterBuilder builder, final ANode node)
+
+    void constrain(final ThumbnailParameterBuilder builder, final ANode node)
             throws QueryException {
-        boolean use = Utils.attrib(node, "use", true);
-        builder.useExifOrientation(use);
+
+        boolean aspect = Utils.attrib(node, "aspect", true);
+        builder.keepAspectRatio(aspect);
+       // FnTrace.trace(Boolean.toString(aspect).getBytes(), "constrain: ".getBytes(), queryContext);
+        boolean exif = Utils.attrib(node, "exif", true);
+        builder.useExifOrientation(exif);
+
+        boolean fit = Utils.attrib(node, "fit", true);
+        builder.fitWithinDimensions(fit);
     }
 
-    static void size(final ThumbnailParameterBuilder builder, final ANode node)
+    void size(final ThumbnailParameterBuilder builder, final ANode node)
             throws QueryException {
         int width = (int) Int.parse(node.attribute("width"), null);
         int height = (int) Int.parse(node.attribute("height"), null);
         builder.size(width, height);
     }
 
-    static void scale(final ThumbnailParameterBuilder builder, final ANode node)
+    void scale(final ThumbnailParameterBuilder builder, final ANode node)
             throws QueryException {
         double x = Utils.attrib(node, "x", 0.5f);
         double y = Utils.attrib(node, "y", 0.5f);
         builder.scale(x, y);
     }
 
-    static List<ImageFilter> filters(final ANode filters) throws QueryException, IOException {
+    List<ImageFilter> filters(final ANode filters) throws QueryException, IOException {
         Pipeline pipeline = new Pipeline();
         Iterator<ANode> itr = filters.children().iterator();
         while (itr.hasNext()) {
@@ -193,7 +209,7 @@ public class Thumbs extends QueryModule{
         return pipeline.getFilters();
     }
 
-    private static void watermark(final Pipeline pipeline, final ANode node)
+    private void watermark(final Pipeline pipeline, final ANode node)
             throws IOException, QueryException {
         ImageFilter filter;
         Position pos;
@@ -204,13 +220,13 @@ public class Thumbs extends QueryModule{
         pipeline.add(filter);
     }
 
-    private static void rotate(final Pipeline pipeline, final ANode node)
+    private void rotate(final Pipeline pipeline, final ANode node)
             throws QueryException {
         double angle = (double) Dbl.parse(node.attribute("angle"), null);
         pipeline.add(Rotation.newRotator(angle));
     }
 
-    private static void flip(final Pipeline pipeline, final ANode node) {
+    private void flip(final Pipeline pipeline, final ANode node) {
         ImageFilter filter;
         String axis = Token.string(node.attribute("axis"));
                // FnTrace.trace(axis.getBytes(), "FLIP: ".getBytes(), queryContext);
@@ -218,7 +234,7 @@ public class Thumbs extends QueryModule{
         pipeline.add(filter);
     }
 
-    private static void colorize(final Pipeline pipeline, final ANode node) throws QueryException {
+    private void colorize(final Pipeline pipeline, final ANode node) throws QueryException {
         ImageFilter filter;
         String color;
         color = Utils.attrib(node, "color", "black");
@@ -227,7 +243,7 @@ public class Thumbs extends QueryModule{
         pipeline.add(filter);
     }
 
-    private static void canvas(final Pipeline pipeline, final ANode node) throws QueryException {
+    private void canvas(final Pipeline pipeline, final ANode node) throws QueryException {
         ImageFilter filter;
         String color;
         Position pos;
@@ -239,7 +255,7 @@ public class Thumbs extends QueryModule{
         pipeline.add(filter);
     }
 
-    private static void caption(final Pipeline pipeline, final ANode node) throws QueryException {
+    private void caption(final Pipeline pipeline, final ANode node) throws QueryException {
         ImageFilter filter;
         String color;
         Position pos;
@@ -248,9 +264,10 @@ public class Thumbs extends QueryModule{
         pos = Utils.position(node, "position", Positions.TOP_CENTER);
         String fontName = Utils.attrib(node, "font", "SansSerif");
         int size = Utils.attrib(node, "size", 14);
+        int insets = Utils.attrib(node, "insets", 0);
         Font font = new Font(fontName, Font.PLAIN, size);
         filter = new Caption(text, font , Utils.stringToColor(color),
-                pos, 0);
+                pos, insets);
         pipeline.add(filter);
     }
 }

@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2017-04-21T15:03:58.643+01:00</xqdoc:date>
+    <xqdoc:date>2017-04-29T22:28:45.705+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -10,20 +10,47 @@
       <xqdoc:description>Generate image thumbnails using the thumbnailator library.</xqdoc:description>
       <xqdoc:see>https://github.com/coobird/thumbnailator</xqdoc:see>
       <xqdoc:author>andy bunce</xqdoc:author>
-      <xqdoc:version>4.4.1</xqdoc:version>
+      <xqdoc:version>0.5</xqdoc:version>
     </xqdoc:comment>
   </xqdoc:module>
   <xqdoc:namespaces>
     <xqdoc:namespace prefix="thumbnails" uri="expkg-zone58:image.thumbnailator"/>
+    <xqdoc:namespace prefix="Thumbs" uri="org.expkgzone58.image.Thumbs"/>
   </xqdoc:namespaces>
-  <xqdoc:imports/>
+  <xqdoc:imports>
+    <xqdoc:import type="library">
+      <xqdoc:uri>org.expkgzone58.image.Thumbs</xqdoc:uri>
+    </xqdoc:import>
+  </xqdoc:imports>
   <xqdoc:variables/>
   <xqdoc:functions>
+    <xqdoc:function arity="2">
+      <xqdoc:comment>
+        <xqdoc:description>generate scaled version of source image with maximum dimension of size</xqdoc:description>
+        <xqdoc:param>$source base64Binary (streamed?) e.g from `fetch:binary`</xqdoc:param>
+        <xqdoc:return>base64Binary for thumbnail</xqdoc:return>
+      </xqdoc:comment>
+      <xqdoc:name>thumbnails:size</xqdoc:name>
+      <xqdoc:signature>declare function thumbnails:size($source as xs:base64Binary, $size as xs:integer) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>source</xqdoc:name>
+          <xqdoc:type>xs:base64Binary</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>size</xqdoc:name>
+          <xqdoc:type>xs:integer</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>xs:base64Binary</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
     <xqdoc:function arity="3">
       <xqdoc:comment>
         <xqdoc:description>generate scaled version of source image with maximum dimension of size</xqdoc:description>
         <xqdoc:param>$source base64Binary (streamed?) e.g from `fetch:binary`</xqdoc:param>
-        <xqdoc:custom tag="result">base64Binary for thumbnail</xqdoc:custom>
+        <xqdoc:return>base64Binary for thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:size</xqdoc:name>
       <xqdoc:signature>declare function thumbnails:size($source as xs:base64Binary, $width as xs:integer, $height as xs:integer) as xs:base64Binary</xqdoc:signature>
@@ -45,14 +72,36 @@
         <xqdoc:type>xs:base64Binary</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
+    <xqdoc:function arity="2">
+      <xqdoc:comment>
+        <xqdoc:description>generate scaled version of source image at given factors 0-1</xqdoc:description>
+        <xqdoc:param>$source base64Binary (streamed?) e.g from `fetch:binary`</xqdoc:param>
+        <xqdoc:return>the thumbnail</xqdoc:return>
+      </xqdoc:comment>
+      <xqdoc:name>thumbnails:scale</xqdoc:name>
+      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary, $scale as xs:double) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>source</xqdoc:name>
+          <xqdoc:type>xs:base64Binary</xqdoc:type>
+        </xqdoc:parameter>
+        <xqdoc:parameter>
+          <xqdoc:name>scale</xqdoc:name>
+          <xqdoc:type>xs:double</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>xs:base64Binary</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
     <xqdoc:function arity="3">
       <xqdoc:comment>
         <xqdoc:description>generate scaled version of source image at given factors 0-1</xqdoc:description>
         <xqdoc:param>$source base64Binary (streamed?) e.g from `fetch:binary`</xqdoc:param>
-        <xqdoc:custom tag="result">base64Binary for thumbnail</xqdoc:custom>
+        <xqdoc:return>the thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:scale</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary, $xscale as xs:float, $yscale as xs:float) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary, $xscale as xs:double, $yscale as xs:double) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>
@@ -60,11 +109,11 @@
         </xqdoc:parameter>
         <xqdoc:parameter>
           <xqdoc:name>xscale</xqdoc:name>
-          <xqdoc:type>xs:float</xqdoc:type>
+          <xqdoc:type>xs:double</xqdoc:type>
         </xqdoc:parameter>
         <xqdoc:parameter>
           <xqdoc:name>yscale</xqdoc:name>
-          <xqdoc:type>xs:float</xqdoc:type>
+          <xqdoc:type>xs:double</xqdoc:type>
         </xqdoc:parameter>
       </xqdoc:parameters>
       <xqdoc:return>
@@ -76,7 +125,7 @@
         <xqdoc:description>generate thumbnail using parameters specified via XML</xqdoc:description>
         <xqdoc:param>$source base64Binary (streamed?) e.g from `fetch:binary`</xqdoc:param>
         <xqdoc:param>$task XML parameters &lt;task&gt;&lt;size width="100" ..</xqdoc:param>
-        <xqdoc:custom tag="result">base64Binary for thumbnail</xqdoc:custom>
+        <xqdoc:return>the thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:task</xqdoc:name>
       <xqdoc:signature>declare function thumbnails:task($source as xs:base64Binary, $task as element(thumbnail)) as xs:base64Binary</xqdoc:signature>
@@ -96,9 +145,31 @@
     </xqdoc:function>
     <xqdoc:function arity="1">
       <xqdoc:comment>
-        <xqdoc:description>validate task XML against schema</xqdoc:description>
-        <xqdoc:param>$src XML parameters &lt;task&gt;&lt;size width="100" ..</xqdoc:param>
-        <xqdoc:custom tag="result">validation report</xqdoc:custom>
+        <xqdoc:description>validate task thumbnail XML against schema</xqdoc:description>
+        <xqdoc:param>$src XML parameters &lt;thumbnail&gt;&lt;size width="100" ..</xqdoc:param>
+        <xqdoc:return>empty-sequence or error</xqdoc:return>
+        <xqdoc:error>BXVA0001: the validation fails.</xqdoc:error>
+        <xqdoc:error>BXVA0002: the validation process cannot be started.</xqdoc:error>
+        <xqdoc:error>BXVA0003: no XML Schema validator is available.</xqdoc:error>
+        <xqdoc:error>BXVA0004: no validator is found for the specified version.</xqdoc:error>
+      </xqdoc:comment>
+      <xqdoc:name>thumbnails:validate</xqdoc:name>
+      <xqdoc:signature>declare function thumbnails:validate($src as item()*) as empty-sequence()</xqdoc:signature>
+      <xqdoc:parameters>
+        <xqdoc:parameter>
+          <xqdoc:name>src</xqdoc:name>
+          <xqdoc:type occurrence="*">item()</xqdoc:type>
+        </xqdoc:parameter>
+      </xqdoc:parameters>
+      <xqdoc:return>
+        <xqdoc:type>empty-sequence()</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="1">
+      <xqdoc:comment>
+        <xqdoc:description>validate task thumbnail XML against schema</xqdoc:description>
+        <xqdoc:param>$src XML parameters &lt;thumbnail&gt;&lt;size width="100" ..</xqdoc:param>
+        <xqdoc:return>validation report</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:validation-report</xqdoc:name>
       <xqdoc:signature>declare function thumbnails:validation-report($src as item()*) as element(report)</xqdoc:signature>
