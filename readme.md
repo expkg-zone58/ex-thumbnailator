@@ -1,9 +1,11 @@
 # expkg-zone58:image.thumbnailator
 An XQuery interface to the image thumbnail generator library
-[thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 8.6.2+.
+[thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 9+.
 
 Features size, scale, caption, rotate, flip, colorize, watermark. More details at [doc](doc/readme.md)
 
+## Versions
+* For Basex 9+ use thumbnailator 6.0.2+
 
 ## Usage
 
@@ -61,7 +63,7 @@ the thumbnailator jar included. See [releases](../../releases) for installation 
 
 ## License
 
-* ex-thumbnailator Copyright (c) 2016-2017, Andy Bunce. (Apache 2 License). 
+* ex-thumbnailator Copyright (c) 2013-2017, Andy Bunce. (Apache 2 License). 
 * thumbnailator Copyright (c) Chris Kroells (MIT License).
 
 

@@ -32,7 +32,7 @@ declare %updating  function write-xqdoc($path,$src,$dest){
     case "application/xquery"
       return file:write(
           fn:resolve-uri($path || ".xml",$dest),
-           inspect:xqdoc($url)
+         inspect:xqdoc($url)  
          )
     default 
       return ()

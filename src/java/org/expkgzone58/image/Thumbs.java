@@ -18,7 +18,7 @@ import org.basex.io.IOContent;
 import org.basex.query.QueryException;
 import org.basex.query.QueryModule;
 //import org.basex.query.func.fn.FnTrace;
-import org.basex.query.value.item.B64Stream;
+import org.basex.query.value.item.B64Lazy;
 import org.basex.query.value.item.Dbl;
 import org.basex.query.value.item.Int;
 import org.basex.query.value.node.ANode;
@@ -51,7 +51,7 @@ import net.coobird.thumbnailator.filters.ImageFilter;
  */
 public class Thumbs extends QueryModule{
 
-    public B64Stream size(final B64Stream inputStream, final int width, final int height)
+    public B64Lazy size(final B64Lazy inputStream, final int width, final int height)
             throws IOException, QueryException {
         ByteArrayInputStream is = new ByteArrayInputStream(inputStream.binary(null));
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -59,10 +59,10 @@ public class Thumbs extends QueryModule{
         builder.size(width, height);
         StreamThumbnailTask task = new StreamThumbnailTask(builder.build(), is, os);
         Thumbnailator.createThumbnail(task);
-        return new B64Stream(new IOContent(os.toByteArray()), IOERR_X);
+        return new B64Lazy(new IOContent(os.toByteArray()), IOERR_X);
     }
 
-    public B64Stream scale(final B64Stream inputStream,
+    public B64Lazy scale(final B64Lazy inputStream,
             final double xscale, final double yscale)
             throws IOException, QueryException {
         ByteArrayInputStream is = new ByteArrayInputStream(inputStream.binary(null));
@@ -71,17 +71,17 @@ public class Thumbs extends QueryModule{
         builder.scale(xscale, yscale);
         StreamThumbnailTask task = new StreamThumbnailTask(builder.build(), is, os);
         Thumbnailator.createThumbnail(task);
-        return new B64Stream(new IOContent(os.toByteArray()), IOERR_X);
+        return new B64Lazy(new IOContent(os.toByteArray()), IOERR_X);
     }
 
-    public B64Stream task(final B64Stream inputStream, final ANode thumbnail)
+    public B64Lazy task(final B64Lazy inputStream, final ANode thumbnail)
             throws IOException, QueryException {
         ByteArrayInputStream is = new ByteArrayInputStream(inputStream.binary(null));
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         ThumbnailParameter param = fromNode(thumbnail);
         StreamThumbnailTask task = new StreamThumbnailTask(param, is, os);
         Thumbnailator.createThumbnail(task);
-        return new B64Stream(new IOContent(os.toByteArray()), IOERR_X);
+        return new B64Lazy(new IOContent(os.toByteArray()), IOERR_X);
     }
 
     // build parameters from XML

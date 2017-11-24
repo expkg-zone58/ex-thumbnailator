@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
 <jardesc>
-    <jar path="ex-thumbnailator/src/main/content/thumbhelper-5.0.11.jar"/>
+    <jar path="ex-thumbnailator/src/main/content/thumbhelper-6.0.0.jar"/>
     <options buildIfNeeded="true" compress="true" descriptionLocation="/ex-thumbnailator/makejar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="true" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
