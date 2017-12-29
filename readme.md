@@ -1,4 +1,5 @@
 # expkg-zone58:image.thumbnailator
+
 An XQuery interface to the image thumbnail generator library
 [thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 9+.
 
