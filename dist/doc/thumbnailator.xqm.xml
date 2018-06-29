@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2017-11-24T23:26:38.524Z</xqdoc:date>
+    <xqdoc:date>2018-06-29T19:13:26.072+01:00</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -181,6 +181,13 @@
       </xqdoc:parameters>
       <xqdoc:return>
         <xqdoc:type>element(report)</xqdoc:type>
+      </xqdoc:return>
+    </xqdoc:function>
+    <xqdoc:function arity="0">
+      <xqdoc:name>thumbnails:schema-uri</xqdoc:name>
+      <xqdoc:signature>declare function thumbnails:schema-uri() as xs:anyURI</xqdoc:signature>
+      <xqdoc:return>
+        <xqdoc:type>xs:anyURI</xqdoc:type>
       </xqdoc:return>
     </xqdoc:function>
   </xqdoc:functions>

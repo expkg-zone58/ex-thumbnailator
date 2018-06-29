@@ -29,7 +29,7 @@ declare
   
 };
   
-(:~ make a thumbnail :)
+(:~ validate a task :)
 declare
   %unit:test
   function test:validate() {

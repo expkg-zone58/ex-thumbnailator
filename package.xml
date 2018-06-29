@@ -58,5 +58,11 @@
   <version num="6.0.2">
       <!-- generated: {fn:current-dateTime()} -->
     </version>
+  <version num="7.0.0">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
+  <version num="7.0.1">
+      <!-- generated: {fn:current-dateTime()} -->
+    </version>
   </pkg>
 </repo>

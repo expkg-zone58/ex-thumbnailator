@@ -85,3 +85,9 @@ as element(report)
 {
   validate:xsd-report($src,"task.xsd")
 };
+
+declare function thumbnails:schema-uri()
+as xs:anyURI
+{
+  resolve-uri("task.xsd")
+};

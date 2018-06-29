@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="lib" path="src/main/content/thumbnailator-0.4.8.jar"/>
-	<classpathentry kind="lib" path="lib/BaseX90-20171123.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/BaseX902.jar" sourcepath="/basex-core"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

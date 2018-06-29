@@ -14,20 +14,23 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.basex.data.Data;
 import org.basex.io.IOContent;
 import org.basex.query.QueryException;
 import org.basex.query.QueryModule;
 //import org.basex.query.func.fn.FnTrace;
 import org.basex.query.value.item.B64Lazy;
-import org.basex.query.value.item.Dbl;
-import org.basex.query.value.item.Int;
 import org.basex.query.value.node.ANode;
 import org.basex.util.Token;
-import org.basex.data.Data;
 
 import net.coobird.thumbnailator.ThumbnailParameter;
 import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.builders.ThumbnailParameterBuilder;
+import net.coobird.thumbnailator.filters.Canvas;
+import net.coobird.thumbnailator.filters.Caption;
+import net.coobird.thumbnailator.filters.Colorize;
+import net.coobird.thumbnailator.filters.Flip;
+import net.coobird.thumbnailator.filters.ImageFilter;
 import net.coobird.thumbnailator.filters.Pipeline;
 import net.coobird.thumbnailator.filters.Rotation;
 import net.coobird.thumbnailator.filters.Watermark;
@@ -36,11 +39,6 @@ import net.coobird.thumbnailator.geometry.Position;
 import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.geometry.Region;
 import net.coobird.thumbnailator.tasks.StreamThumbnailTask;
-import net.coobird.thumbnailator.filters.Canvas;
-import net.coobird.thumbnailator.filters.Caption;
-import net.coobird.thumbnailator.filters.Colorize;
-import net.coobird.thumbnailator.filters.Flip;
-import net.coobird.thumbnailator.filters.ImageFilter;
 
 /*
  * BaseX Thumbnailator interface
@@ -134,8 +132,8 @@ public class Thumbs extends QueryModule{
     void region(final ThumbnailParameterBuilder builder, final ANode node)
             throws QueryException {
 
-        int width = (int) Int.parse(node.attribute("width"), null);
-        int height = (int) Int.parse(node.attribute("height"), null);
+        int width = Utils.attrib(node,"width", 80);
+        int height = Utils.attrib(node,"height", 80);
         Dimension d = new Dimension(width, height);
         Position pos = Utils.position(node, "position", Positions.CENTER);
         Region r = new Region(pos, new AbsoluteSize(d));
@@ -157,8 +155,8 @@ public class Thumbs extends QueryModule{
 
     void size(final ThumbnailParameterBuilder builder, final ANode node)
             throws QueryException {
-        int width = (int) Int.parse(node.attribute("width"), null);
-        int height = (int) Int.parse(node.attribute("height"), null);
+        int width = Utils.attrib(node, "width", 80);
+        int height = Utils.attrib(node, "height", 80);
         builder.size(width, height);
     }
 
@@ -213,7 +211,7 @@ public class Thumbs extends QueryModule{
             throws IOException, QueryException {
         ImageFilter filter;
         Position pos;
-        String src = Token.string(node.attribute("src"));
+        String src = Utils.attrib(node, "src", "");
         pos = Utils.position(node, "position", Positions.BOTTOM_RIGHT);
         BufferedImage watermarkImg = ImageIO.read(new File(src));
         filter = new Watermark(pos, watermarkImg, Utils.attrib(node, "alpha", 0.5f));
@@ -222,13 +220,13 @@ public class Thumbs extends QueryModule{
 
     private void rotate(final Pipeline pipeline, final ANode node)
             throws QueryException {
-        double angle = (double) Dbl.parse(node.attribute("angle"), null);
+        double angle = (double) Utils.attrib(node, "angle", 0);
         pipeline.add(Rotation.newRotator(angle));
     }
 
-    private void flip(final Pipeline pipeline, final ANode node) {
+    private void flip(final Pipeline pipeline, final ANode node) throws QueryException {
         ImageFilter filter;
-        String axis = Token.string(node.attribute("axis"));
+        String axis = Utils.attrib(node, "axis", "vertical");
                // FnTrace.trace(axis.getBytes(), "FLIP: ".getBytes(), queryContext);
         filter = axis.equalsIgnoreCase("vertical") ? Flip.VERTICAL : Flip.HORIZONTAL;
         pipeline.add(filter);
@@ -247,8 +245,8 @@ public class Thumbs extends QueryModule{
         ImageFilter filter;
         String color;
         Position pos;
-        int width = (int) Int.parse(node.attribute("width"), null);
-        int height = (int) Int.parse(node.attribute("height"), null);
+        int width = Utils.attrib(node, "width", 80);
+        int height = Utils.attrib(node, "height", 80);
         color = Utils.attrib(node, "color", "black");
         pos = Utils.position(node, "position", Positions.CENTER);
         filter = new Canvas(width, height, pos, false, Utils.stringToColor(color));

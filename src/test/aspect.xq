@@ -1,18 +1,22 @@
 (:~ 
  :examples of constrain use
+ : generate 8 files showing all perms of aspect,fit,exif
 :)
 import module namespace t="expkg-zone58:image.thumbnailator";
 declare variable $file-base:=file:parent(static-base-uri());
 declare variable $watermark:="C:\Users\andy\git\ex-thumbnailator\src\test\resources\icon.gif";
 declare variable $src:=file:resolve-path("resources/A34283.jpg",$file-base);
+
 declare function local:wi($data as xs:base64Binary,$filename as xs:string)
 {
   file:write-binary(file:resolve-path($filename,$file-base),$data)
 };
+
 declare function local:constrain($aspect as xs:boolean,$fit as xs:boolean,$exif as xs:boolean)
 {
   <constrain aspect="{$aspect}" fit="{$fit}" exif="{$exif}"/>
 };
+
 let $s:=function($b){if($b) then ".+" else ".-"}
 let $img:= fetch:binary($src)
 let $ft:=(false(),true())

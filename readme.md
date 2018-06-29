@@ -6,7 +6,7 @@ An XQuery interface to the image thumbnail generator library
 Features size, scale, caption, rotate, flip, colorize, watermark. More details at [doc](doc/readme.md)
 
 ## Versions
-* For Basex 9+ use thumbnailator 6.0.2+
+* For Basex 9+ use thumbnailator 7.0.0+
 
 ## Usage
 
