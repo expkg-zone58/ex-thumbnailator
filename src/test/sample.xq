@@ -1,4 +1,4 @@
-import module namespace t="expkg-zone58:image.thumbnailator";
+import module namespace t="expkg-zone58:image.thumbnailator" at "../main/content/thumbnailator.xqm";
 
 declare variable $pic1:=resolve-uri("resources/simple.jpg");
  declare variable $picr:=resolve-uri("resources/result2.jpg");
