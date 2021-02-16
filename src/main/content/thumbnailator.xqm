@@ -2,10 +2,11 @@ xquery version "3.1" encoding "UTF-8";
 (:~ Generate image thumbnails using the thumbnailator library. 
  : @see https://github.com/coobird/thumbnailator
  : @author andy bunce
- : @version 0.5 
+ : @version 0.6 
  :)
 module namespace thumbnails = 'expkg-zone58:image.thumbnailator';
 import module namespace Thumbs = "org.expkgzone58.image.Thumbs";
+
 (:~
  : generate scaled version of source image with maximum dimension of size
  : @param $source base64Binary (streamed?) e.g from `fetch:binary`

@@ -1,13 +1,13 @@
 # expkg-zone58:image.thumbnailator
 
 An XQuery interface to the image thumbnail generator library
-[thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 9+.
+[thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 9.4.5+.
 
 Features size, scale, caption, rotate, flip, colorize, watermark. More details at [doc](doc/readme.md)
 
 ## Versions
-* For Basex 9+ use thumbnailator 7.0.0+
-
+* thumbnailator 8 requires Basex 9.4.5+
+* uses thumbnailator 4.13
 ## Usage
 
 Images are input and output as `xs:base64Binary` items. Inputs typically come from `fetch:binary`

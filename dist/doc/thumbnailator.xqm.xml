@@ -1,6 +1,6 @@
 <xqdoc:xqdoc xmlns:xqdoc="http://www.xqdoc.org/1.0">
   <xqdoc:control>
-    <xqdoc:date>2018-06-29T19:13:26.072+01:00</xqdoc:date>
+    <xqdoc:date>2021-02-16T23:01:20.669Z</xqdoc:date>
     <xqdoc:version>1.1</xqdoc:version>
   </xqdoc:control>
   <xqdoc:module type="library">
@@ -10,18 +10,18 @@
       <xqdoc:description>Generate image thumbnails using the thumbnailator library.</xqdoc:description>
       <xqdoc:see>https://github.com/coobird/thumbnailator</xqdoc:see>
       <xqdoc:author>andy bunce</xqdoc:author>
-      <xqdoc:version>0.5</xqdoc:version>
+      <xqdoc:version>0.6</xqdoc:version>
     </xqdoc:comment>
   </xqdoc:module>
-  <xqdoc:namespaces>
-    <xqdoc:namespace prefix="thumbnails" uri="expkg-zone58:image.thumbnailator"/>
-    <xqdoc:namespace prefix="Thumbs" uri="org.expkgzone58.image.Thumbs"/>
-  </xqdoc:namespaces>
   <xqdoc:imports>
     <xqdoc:import type="library">
       <xqdoc:uri>org.expkgzone58.image.Thumbs</xqdoc:uri>
     </xqdoc:import>
   </xqdoc:imports>
+  <xqdoc:namespaces>
+    <xqdoc:namespace prefix="thumbnails" uri="expkg-zone58:image.thumbnailator"/>
+    <xqdoc:namespace prefix="Thumbs" uri="org.expkgzone58.image.Thumbs"/>
+  </xqdoc:namespaces>
   <xqdoc:variables/>
   <xqdoc:functions>
     <xqdoc:function arity="2">
@@ -31,7 +31,7 @@
         <xqdoc:return>base64Binary for thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:size</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:size($source as xs:base64Binary, $size as xs:integer) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:size($source as xs:base64Binary , $size as xs:integer) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>
@@ -53,7 +53,7 @@
         <xqdoc:return>base64Binary for thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:size</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:size($source as xs:base64Binary, $width as xs:integer, $height as xs:integer) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:size($source as xs:base64Binary , $width as xs:integer , $height as xs:integer) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>
@@ -79,7 +79,7 @@
         <xqdoc:return>the thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:scale</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary, $scale as xs:double) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary , $scale as xs:double) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>
@@ -101,7 +101,7 @@
         <xqdoc:return>the thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:scale</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary, $xscale as xs:double, $yscale as xs:double) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:scale($source as xs:base64Binary , $xscale as xs:double , $yscale as xs:double) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>
@@ -128,7 +128,7 @@
         <xqdoc:return>the thumbnail</xqdoc:return>
       </xqdoc:comment>
       <xqdoc:name>thumbnails:task</xqdoc:name>
-      <xqdoc:signature>declare function thumbnails:task($source as xs:base64Binary, $task as element(thumbnail)) as xs:base64Binary</xqdoc:signature>
+      <xqdoc:signature>declare function thumbnails:task($source as xs:base64Binary , $task as element(thumbnail)) as xs:base64Binary</xqdoc:signature>
       <xqdoc:parameters>
         <xqdoc:parameter>
           <xqdoc:name>source</xqdoc:name>

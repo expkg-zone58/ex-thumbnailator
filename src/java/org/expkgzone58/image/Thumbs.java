@@ -9,7 +9,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -85,10 +84,8 @@ public class Thumbs extends QueryModule{
     // build parameters from XML
     ThumbnailParameter fromNode(final ANode node) throws QueryException, IOException {
         ThumbnailParameterBuilder builder = new ThumbnailParameterBuilder();
-
-        Iterator<ANode> itr = node.children().iterator();
-        while (itr.hasNext()) {
-            ANode element = itr.next();
+        for(final ANode element : node.childIter()) {
+ 
             if (element.kind() == Data.ELEM) {
                 String name = Token.string(element.name());
                // FnTrace.trace(name.getBytes(), "element: ".getBytes(), queryContext);
@@ -169,9 +166,7 @@ public class Thumbs extends QueryModule{
 
     List<ImageFilter> filters(final ANode filters) throws QueryException, IOException {
         Pipeline pipeline = new Pipeline();
-        Iterator<ANode> itr = filters.children().iterator();
-        while (itr.hasNext()) {
-            ANode node = itr.next();
+        for(final ANode node : filters.childIter()) {
             if (node.kind() == Data.ELEM) {
                 switch (Token.string(node.name())) {
 
