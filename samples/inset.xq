@@ -2,7 +2,7 @@
  :examples of inset use
 :)
 import module namespace t="expkg-zone58:image.thumbnailator";
-
+declare variable $resources:=file:resolve-path("../src/test/resources/.",file:base-dir()) ;
 declare variable $watermark:=local:path("resources\icon.gif");
 declare variable $src:=local:path("resources/A34283.jpg");
 

@@ -29,7 +29,7 @@ declare %updating  function write-xqdoc($path,$src,$dest){
   let $type:=fetch:content-type($url)
  
   return  switch($type)
-    case "application/xquery"
+    case "Xapplication/xquery"
       return file:write(
           fn:resolve-uri($path || ".xml",$dest),
          inspect:xqdoc($url)  

@@ -1,9 +1,11 @@
-import module namespace t="expkg-zone58:image.thumbnailator" at "../main/content/thumbnailator.xqm";
+import module namespace t="expkg-zone58:image.thumbnailator" ;
+declare variable $resources:=file:resolve-path("../src/test/resources/.",file:base-dir()) ;
 
-declare variable $pic1:=resolve-uri("resources/simple.jpg");
- declare variable $picr:=resolve-uri("resources/result2.jpg");
- declare variable $remote:="http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg";
- declare variable $watermark:="C:\Users\andy\git\ex-thumbnailator\src\test\resources\icon.jpg";
+
+declare variable $pic1:=file:resolve-path("simple.jpg",$resources);
+ declare variable $picr:=file:resolve-path("result2.jpg",$resources);
+ declare variable $remote:="https://upload.wikimedia.org/wikipedia/commons/3/34/Art-portrait-collage_2.jpg";
+ declare variable $watermark:=file:resolve-path("icon.jpg",$resources);
 let $task:=<thumbnail>
               <size width="500" height="500"/>
               <filters>             

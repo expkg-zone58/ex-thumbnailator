@@ -1,9 +1,10 @@
-# expkg-zone58:image.thumbnailator
+# expkg-zone58:image.thumbnailator [gh](https://github.com/expkg-zone58/ex-thumbnailator)
+
 
 An XQuery interface to the image thumbnail generator library
 [thumbnailator](https://github.com/coobird/thumbnailator) for BaseX 10+.
 
-Features size, scale, caption, rotate, flip, colorize, watermark. More details at [doc](doc/readme.md)
+Features size, scale, caption, rotate, flip, colorize, watermark. More detail  [here](doc/readme.md).
 
 ## Versions
 * thumbnailator 9 requires Basex 10+
@@ -11,7 +12,7 @@ Features size, scale, caption, rotate, flip, colorize, watermark. More details a
 ## Usage
 
 Images are input and output as `xs:base64Binary` items. Inputs typically come from `fetch:binary`
-which allows for file and http sources. Outputs may be saved with `file:write-binary` or `db:store`
+which allows for file and http sources. Outputs may be saved with `file:write-binary` or `db:put-binary`
 
 ### Simple
 
@@ -19,7 +20,7 @@ Create a thumbnail of given size
 ```xquery
 import module namespace t="expkg-zone58:image.thumbnailator";
 
-fetch:binary("http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg")
+fetch:binary("https://upload.wikimedia.org/wikipedia/commons/3/34/Art-portrait-collage_2.jpg")
 =>t:size(80)
 ```
 or scale to a fraction of the original
@@ -50,7 +51,7 @@ let $task:=
     </filters>         
 </thumbnail>
 
-return fetch:binary("http://images.metmuseum.org/CRDImages/ep/original/DT46.jpg")
+return fetch:binary("https://upload.wikimedia.org/wikipedia/commons/3/34/Art-portrait-collage_2.jpg")
 =>t:task($task)
 ```
 The schema for this XML is available at [task.xsd](./src/main/content/task.xsd)

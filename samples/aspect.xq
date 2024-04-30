@@ -3,13 +3,13 @@
  : generate 8 files showing all perms of aspect,fit,exif
 :)
 import module namespace t="expkg-zone58:image.thumbnailator";
-declare variable $file-base:=file:parent(static-base-uri());
-declare variable $watermark:="C:\Users\andy\git\ex-thumbnailator\src\test\resources\icon.gif";
-declare variable $src:=file:resolve-path("resources/A34283.jpg",$file-base);
+declare variable $resources:=file:resolve-path("../src/test/resources/.",file:base-dir()) ;
+declare variable $watermark:=file:resolve-path("icon.gif",$resources);
+declare variable $src:=file:resolve-path("A34283.jpg",$resources);
 
 declare function local:wi($data as xs:base64Binary,$filename as xs:string)
 {
-  file:write-binary(file:resolve-path($filename,$file-base),$data)
+  file:write-binary(file:resolve-path($filename=>trace("AA"),file:base-dir()),$data)
 };
 
 declare function local:constrain($aspect as xs:boolean,$fit as xs:boolean,$exif as xs:boolean)
@@ -35,4 +35,4 @@ let $task:=<thumbnail>
               </filters>
               <output format="gif"/>
              </thumbnail>           
-return t:task($img,$task) => local:wi("resources/" || $file || ".gif")
+return t:task($img,$task) => local:wi("outputs/" || $file || ".gif")
