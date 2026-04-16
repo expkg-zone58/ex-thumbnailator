@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17"/>
 	<classpathentry kind="src" path="src/java"/>
-	<classpathentry kind="lib" path="c:/Users/mrwhe/Desktop/basex.home/basex.107/BaseX.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mrwhe/git/expkg-zone58/ex-thumbnailator/lib/thumbnailator-0.4.20.jar"/>
+	<classpathentry kind="lib" path="lib/BaseX107.jar"/>
+	<classpathentry kind="lib" path="lib/thumbnailator-0.4.20.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
