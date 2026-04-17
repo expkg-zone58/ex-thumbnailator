@@ -2,70 +2,43 @@
 
 ## Repo: ex-thumbnailator
 
-XQuery module for BaseX 10+ that wraps the thumbnailator Java library to generate image thumbnails.
+XQuery module for BaseX 10+ wrapping thumbnailator Java library.
 
-## Key facts
+## Quick start
 
-- **Language**: XQuery 3.1 + Java (BaseX module)
-- **Main module**: `src/main/content/thumbnailator.xqm` → `expkg-zone58:image.thumbnailator`
-- **Java class**: `src/java/org/expkgzone58/image/Thumbs.java`
-- **Schema**: `src/main/content/task.xsd` for thumbnail task XML
+- **Build**: `tools/build.xq` → `dist/thumbnailator-8.0.1.xar`
+- **Test**: `src/test/test.xqm` (`%unit:test` functions)
+- **Sample**: `src/test/sample.xq`
 
-## Build & test
+## API
 
-**Build xar package**: Run `tools/build.xq` in BaseX to generate:
-- Dist: `dist/thumbnailator-8.0.1.xar`
-- XQDoc: `dist/doc/thumbnailator.xqm.xml`
-- Updates: `package.xml`
+| Function | Returns |
+|----------|---------|
+| `thumbnails:size($src, $w, $h)` | `xs:base64Binary` |
+| `thumbnails:scale($src, $x, $y)` | `xs:base64Binary` |
+| `thumbnails:task($src, $task)` | `xs:base64Binary` |
+| `thumbnails:validate($src)` | `empty-sequence()` or error |
+| `thumbnails:validation-report($src)` | `element(report)` |
 
-**Run tests**: `test.xqm` uses BaseX Unit module (`%unit:test` functions)
+Inputs from `fetch:binary()`, outputs via `file:write-binary()`.
 
-## Core API
+## XML schema
 
-| Function | Description |
-|----------|-------------|
-| `size($src, $w, $h)` | Thumbnail to exact dimensions |
-| `scale($src, $x, $y)` | Scale by factor (0-1) |
-| `task($src, $task)` | Full control via XML task |
+- Root: `<thumbnail>` (not `<task>`)
+- Either `<size>` or `<scale>` required
+- `constrain@exif="true"` default: swaps dimensions for portrait, ignores `flip`
 
-**Inputs/outputs**: `xs:base64Binary` (use `fetch:binary` and `file:write-binary`)
-
-## XML task structure
-
-```xml
-<thumbnail>
-  <size width="100" height="100"/>  <!-- or <scale x="0.5" y="0.5"/> -->
-  <region .../>                     <!-- optional crop -->
-  <constrain aspect="true" fit="true" exif="true"/>  <!-- default true -->
-  <filters>...</filters>             <!-- colorize, caption, rotate, flip, canvas, watermark -->
-  <output format="gif"/>            <!-- override output format -->
-</thumbnail>
-```
-
-## Exif gotcha
-
-When `constrain@exif="true"` (default):
-- `size` and `fit` dimensions swap for portrait images
-- `flip` filter is ignored
-
-Set `exif="false"` to disable.
-
-## Project structure
+## Structure
 
 ```
-src/
-  main/
-    content/        # XQuery modules, XSD, JARs
-    basex.xml       # Package metadata (JARs, Java class)
-    expath-pkg.xml  # EXPath package def
-  test/
-    test.xqm        # Unit tests
-    sample.xq       # Usage examples
-    *.xml           # Test tasks
+src/main/           # XQuery, JARs, XSD, basex.xml, expath-pkg.xml
+src/java/           # Thumbs.java (BaseX QueryModule)
+src/test/           # test.xqm, sample.xq, test tasks
+tools/              # build.xq
+dist/               # built xar package
 ```
 
 ## Setup
 
-- Requires BaseX 10+
-- Java 17
-- Classpath: `lib/thumbnailator-0.4.20.jar`, `lib/BaseX*.jar`
+- BaseX 10+, Java 17
+- JARs: `thumbnailator-0.4.13.jar`, `thumbhelper-8.0.0.jar`

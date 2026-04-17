@@ -8,10 +8,11 @@
 module namespace build = 'quodatum.utils.build';
 declare default function namespace 'quodatum.utils.build'; 
 declare namespace pkg="http://expath.org/ns/pkg";
+
 (:~
  : file paths below $src
  : $src typically from resolve-uri
- : @return sequences of relative file paths "content/ebnf/CR-xquery-31-20141218.ebnf" "..."
+ : @return sequences of relative file paths "ff.txt" "..."
  :)
  declare function files($src as xs:string) as xs:string*
  {
@@ -30,10 +31,14 @@ declare %updating  function write-xqdoc($path,$src,$dest){
  
   return  switch($type)
     case "application/xquery"
-      return file:write(
+      return try{
+        file:write(
           fn:resolve-uri($path || ".xml",$dest),
          inspect:xqdoc($url)  
          )
+      }catch *{
+        ()
+      }
     default 
       return ()
 
