@@ -1,4 +1,5 @@
 <package xmlns="http://www.basex.org/modules/pkg">
-   <jar>ex-thumbnailator.jar</jar>
-   <class>org.expkgzone58.image.Thumbs</class>
+  <jar>thumbhelper-8.0.0.jar</jar>
+  <jar>thumbnailator-0.4.13.jar</jar>
+  <class>org.expkgzone58.image.Thumbs</class>
 </package>
