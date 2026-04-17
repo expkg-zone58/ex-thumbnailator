@@ -1,5 +1,11 @@
 package org.expkgzone58.image;
-
+/*
+ * BaseX Thumbnailator interface
+ * @author andy bunce
+ * @copyright Quodatum Ltd
+ * @date 2017
+ * @license Apache 2
+ */
 import static org.basex.query.QueryError.IOERR_X;
 
 import java.awt.Dimension;
@@ -39,13 +45,7 @@ import net.coobird.thumbnailator.geometry.Positions;
 import net.coobird.thumbnailator.geometry.Region;
 import net.coobird.thumbnailator.tasks.StreamThumbnailTask;
 
-/*
- * BaseX Thumbnailator interface
- * @author andy bunce
- * @copyright Quodatum Ltd
- * @date 2017
- * @licence Apache 2
- */
+
 public class Thumbs extends QueryModule{
 
     public B64Lazy size(final B64Lazy inputStream, final int width, final int height)

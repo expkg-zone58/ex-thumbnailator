@@ -9,6 +9,7 @@ import org.basex.query.value.item.Bln;
 import org.basex.query.value.item.Dbl;
 import org.basex.query.value.item.Int;
 import org.basex.query.value.item.Item;
+import org.basex.query.value.item.QNm;
 import org.basex.query.value.node.ANode;
 import org.basex.util.Token;
 
@@ -21,31 +22,31 @@ public final class Utils {
     // get value from attribute with default
     public static String attrib(final ANode element, final String name, final String def)
             throws QueryException {
-        byte[] at = element.attribute(name.getBytes(StandardCharsets.UTF_8));
+        byte[] at = element.attribute(new QNm(name));
         return (at == null) ? def : Token.string(at);
     }
 
     public static float attrib(final ANode element, final String name, final float def)
             throws QueryException {
-        byte[] at = element.attribute(name.getBytes(StandardCharsets.UTF_8));
+        byte[] at = element.attribute(new QNm(name));
         return (at == null) ? def : (float) Dbl.parse(at, null);
     }
 
     public static int attrib(final ANode element, final String name, final int def)
             throws QueryException {
-        byte[] at = element.attribute(name.getBytes(StandardCharsets.UTF_8));
+        byte[] at = element.attribute(new QNm(name));
         return (at == null) ? def : Token.toInt(at);
     }
 
     public static boolean attrib(final ANode element, final String name, final boolean def)
             throws QueryException {
-        byte[] at = element.attribute(name.getBytes(StandardCharsets.UTF_8));
+        byte[] at = element.attribute(new QNm(name));
         return (boolean) ((at == null) ? def : Bln.parse(at));
     }
 
     // e.g. TOP_LEFT
     public static Position position(final ANode element, final String name, final Position def) {
-        byte[] at = element.attribute(name.getBytes(StandardCharsets.UTF_8));
+        byte[] at = element.attribute(new QNm(name));
         return (at == null) ? def : Positions.valueOf(Token.string(at));
     }
 
